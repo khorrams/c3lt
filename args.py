@@ -13,14 +13,12 @@ def init_parser():
                         type=float, default=2e-4, help="adam: learning rate")
     parser.add_argument("--lr_map",
                         type=float, default=1e-3, help="learning rate for the mapper!")
-    # parser.add_argument("--lr_gan",
-    #                     type=float, default=2e-4, help="learning rate for the Gen and Disc!")
     parser.add_argument("--b1",
                         type=float, default=0.5, help="adam: decay of first order momentum of gradient")
     parser.add_argument("--b2",
                         type=float, default=0.999, help="adam: decay of first order momentum of gradient")
     parser.add_argument("--n_cpu",
-                        type=int, default=1, help="number of cpu threads to use during batch generation")
+                        type=int, default=2, help="number of cpu threads to use during batch generation")
     parser.add_argument("--seed",
                         type=int, default=85, help="random seed")
     parser.add_argument('--device',
@@ -42,7 +40,7 @@ def init_parser():
     parser.add_argument("--verbose",
                         action='store_true', help="monitor additional loss values during training")
 
-    # parser.add_argument("--gi f_tpf",
+    # parser.add_argument("--gif_tpf",
     #                     type=int, default=1500, help="duration of displaying each frame in the GIF")
 
     # ----- dataset args -----
@@ -62,6 +60,8 @@ def init_parser():
                         type=int, default=4, help="first (input) class index")
     parser.add_argument("--cls_2",
                         type=int, default=9, help="second (CF) class index")
+    parser.add_argument("--n_steps",
+                        type=int, default=1, help="number of steps for the walk in the latent space")
 
     # C3LT setup
     parser.add_argument("--gen_path",
@@ -72,14 +72,12 @@ def init_parser():
                         type=str, default="models/classifiers/mnist.pt", help="path to pretrained classifier")
     parser.add_argument("--latent_dim",
                         type=int, default=100, help="dimensionality of the latent space")
-    parser.add_argument("--n_steps",
-                        type=int, default=1, help="number of steps for the walk in the latent space")
     parser.add_argument("--alpha",
                         type=float, default=0.1, help="coefficient for classification loss")
     parser.add_argument("--beta",
                         type=float, default=0.1, help="coefficient for consistency loss")
     parser.add_argument("--gamma",
-                        type=float, default=0.0, help="coefficient for adversarial loss")
+                        type=float, default=0.001, help="coefficient for adversarial loss")
     parser.add_argument("--p1",
                         type=float, default=10.0, help="penalty coefficient for smoothness loss")
     parser.add_argument("--p2",
